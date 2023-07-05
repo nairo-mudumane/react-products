@@ -1,5 +1,10 @@
 import { PageContainer } from "../../components";
+import Products from "./products";
 
 export function Home() {
-  return <PageContainer>Home</PageContainer>;
+  return (
+    <PageContainer>
+      <Products />
+    </PageContainer>
+  );
 }

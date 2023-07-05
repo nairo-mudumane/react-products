@@ -25,6 +25,7 @@ const MuiTheme = createTheme({
     error: { main: THEME.colors.error },
   },
   components: {
+    MuiAlertTitle: { styleOverrides: { root: { fontWeight: 700, mb: 2 } } },
     MuiPaper: {
       styleOverrides: { root: { backgroundColor: THEME.colors.tertiary } },
     },
