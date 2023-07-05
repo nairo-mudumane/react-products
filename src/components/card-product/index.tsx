@@ -5,6 +5,7 @@ import { StyledCardProduct } from "./styles";
 export function CardProduct({
   product,
   link,
+  hideTitle = false,
   clampDescription = true,
 }: ICardProductProps) {
   return (
@@ -12,7 +13,7 @@ export function CardProduct({
       <Link to={link ?? "#"} className="w-full">
         <div
           className={`w-full z-0 ${
-            clampDescription ? "h-[15rem]" : "h-[20rem]"
+            clampDescription ? "h-[15rem]" : "h-[32rem]"
           }`}
         >
           <img
@@ -24,9 +25,11 @@ export function CardProduct({
         </div>
       </Link>
 
-      <header className="details py-4 px-5 mt-[-1.5rem] z-10 w-full gap-4 flex flex-col items-center justify-center rounded-3xl">
-        <h2 className="line-clamp-1 font-bold">{product.title}</h2>
-      </header>
+      {!hideTitle && (
+        <header className="details py-4 px-5 mt-[-1.5rem] z-10 w-full gap-4 flex flex-col items-center justify-center rounded-3xl">
+          <h2 className="line-clamp-1 font-bold">{product.title}</h2>
+        </header>
+      )}
     </StyledCardProduct>
   );
 }

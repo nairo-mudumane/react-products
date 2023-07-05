@@ -1,8 +1,8 @@
 import { IProduct } from "../@types";
 import services from ".";
 
-type IDataReturn = {
-  products: Array<IProduct>;
+type IDataReturn<T = Array<IProduct>> = {
+  products: T;
   total: number;
   skip: number;
   limit: number;
@@ -20,4 +20,16 @@ async function getAll(): Promise<Array<IProduct>> {
   }
 }
 
-export default { getAll };
+async function getById(id: number): Promise<IProduct> {
+  try {
+    const products = services.api
+      .get(`/products/${id}`)
+      .then(({ data }) => data);
+
+    return products;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export default { getAll, getById };
