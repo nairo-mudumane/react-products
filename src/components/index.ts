@@ -3,3 +3,5 @@ export * from "./header";
 export * from "./footer";
 export * from "./full-screen-loading";
 export * from "./card-product";
+export * from "./categories-list";
+export * from "./chip-button";
