@@ -9,9 +9,11 @@ import {
 } from "../../components";
 import { Alert, AlertTitle } from "@mui/material";
 import Aside from "./aside";
+import Related from "./related";
 
 export function ProductById() {
   const { id } = useParams<IParams>();
+
   const {
     data: product,
     isLoading,
@@ -55,6 +57,10 @@ export function ProductById() {
           <Aside product={product} />
         </aside>
       </div>
+
+      <section className="my-6 mt-10">
+        <Related category={product.category} />
+      </section>
     </PageContainer>
   );
 }

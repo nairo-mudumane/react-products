@@ -1,6 +1,7 @@
 import { Search, Star } from "@mui/icons-material";
 import { IAsideProps } from "./@types";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function Aside({ product, ...props }: IAsideProps) {
   const {
@@ -12,6 +13,13 @@ export default function Aside({ product, ...props }: IAsideProps) {
     stock,
     price,
   } = product;
+
+  const navigate = useNavigate();
+
+  function searchByCategory(event: React.MouseEvent<HTMLButtonElement>) {
+    const { id: category } = event.currentTarget;
+    navigate(`/?filter=${category}`);
+  }
 
   return (
     <div {...props} className="grid gap-4">
@@ -51,7 +59,12 @@ export default function Aside({ product, ...props }: IAsideProps) {
       </div>
 
       <div className="mt-4">
-        <Button variant="contained" sx={{ gap: 1 }}>
+        <Button
+          id={category}
+          variant="contained"
+          sx={{ gap: 1 }}
+          onClick={searchByCategory}
+        >
           <Search />
           <span>{category}</span>
         </Button>

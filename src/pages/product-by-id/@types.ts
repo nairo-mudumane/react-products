@@ -7,3 +7,5 @@ export type IErrorProps = { title: string; message: string };
 export interface IAsideProps extends React.HTMLAttributes<HTMLDivElement> {
   product: IProduct;
 }
+
+export type IRelatedProps = { category: string };
