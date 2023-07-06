@@ -5,3 +5,6 @@ export * from "./full-screen-loading";
 export * from "./card-product";
 export * from "./categories-list";
 export * from "./chip-button";
+export * from "./cart-list";
+export * from "./cart-icon";
+export * from "./cart-item";
