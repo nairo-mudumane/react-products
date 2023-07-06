@@ -1,13 +1,11 @@
-import React from "react";
 import { Drawer } from "@mui/material";
+import { useCart } from "../../hooks";
 
 export function CartList() {
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState<boolean>(true);
-
-  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
+  const { isMenuOpen, toggleMenu } = useCart();
 
   return (
-    <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
+    <Drawer anchor="right" open={isMenuOpen} onClose={toggleMenu}>
       <button>close</button>
       <div>drawer body</div>
     </Drawer>

@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import App from "./App.tsx";
 import "./main.css";
 import { MuiTheme } from "./global";
+import { AuthContextProvider, CartContextProvider } from "./contexts";
 
 const client = new QueryClient();
 
@@ -15,7 +16,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <BrowserRouter>
       <QueryClientProvider client={client}>
         <ThemeProvider theme={MuiTheme}>
-          <App />
+          <AuthContextProvider>
+            <CartContextProvider>
+              <App />
+            </CartContextProvider>
+          </AuthContextProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </BrowserRouter>

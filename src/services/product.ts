@@ -25,13 +25,15 @@ async function getByCategory(category: string): Promise<Array<IProduct>> {
   }
 }
 
-async function getById(id: number): Promise<IProduct> {
+async function getById(id: number): Promise<IProduct | null> {
   try {
-    const products = services.api
-      .get(`/products/${id}`)
-      .then(({ data }) => data);
+    let product = null;
 
-    return products;
+    await services.api.get(`/products/${id}`).then(({ data }) => {
+      if (data) product = data;
+    });
+
+    return product;
   } catch (error) {
     throw error;
   }

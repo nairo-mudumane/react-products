@@ -1,16 +1,19 @@
-import { IProduct } from ".";
+import { IProduct, IUser } from ".";
+
+export interface ICartProduct extends IProduct {
+  quantityInCart?: number;
+}
 
 export type ICart = {
-  products: Array<IProduct>;
-  id: number;
+  user: IUser | null;
+  products: Array<ICartProduct>;
   total: number;
-  discountedTotal: number;
-  userId: number;
-  totalProducts: number;
   totalQuantity: number;
+  discountedTotal: number;
+  totalProducts: number;
 };
 
 export type INewCart = {
-  userId: number;
+  user: IUser;
   products: Array<{ id: number; quantity: number }>;
 };

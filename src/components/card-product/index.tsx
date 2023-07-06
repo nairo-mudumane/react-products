@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ICardProductProps } from "./@types";
 import { StyledCardProduct } from "./styles";
+import { CartBtnAddItem } from "..";
 
 export function CardProduct({
   product,
@@ -28,6 +29,10 @@ export function CardProduct({
       {!hideTitle && (
         <header className="details py-4 px-5 mt-[-1.5rem] z-10 w-full gap-4 flex flex-col items-center justify-center rounded-3xl">
           <h2 className="line-clamp-1 font-bold">{product.title}</h2>
+
+          <div>
+            <CartBtnAddItem productId={product.id} />
+          </div>
         </header>
       )}
     </StyledCardProduct>

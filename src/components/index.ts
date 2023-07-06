@@ -8,3 +8,5 @@ export * from "./chip-button";
 export * from "./cart-list";
 export * from "./cart-icon";
 export * from "./cart-item";
+export * from "./cart-btn-add-item";
+export * from "./modal-login";

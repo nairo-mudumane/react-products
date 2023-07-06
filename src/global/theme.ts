@@ -29,15 +29,17 @@ const MuiTheme = createTheme({
     MuiPaper: {
       styleOverrides: { root: { backgroundColor: THEME.colors.tertiary } },
     },
-    // MuiTextField: {
-    //   styleOverrides: {
-    //     root: {
-    //       color: "#fff",
-    //       "& input": { color: "#fff !important" },
-    //       "& fieldset": { borderColor: THEME.colors.muted },
-    //     },
-    //   },
-    // },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          fieldset: { borderColor: "#a1a1a1" },
+          "& label, & label.Mui-focused": { color: " #fff" },
+          "& .MuiOutlinedInput-root": {
+            "&.Mui-focused fieldset": { borderColor: "#fff" },
+          },
+        },
+      },
+    },
     MuiIconButton: { styleOverrides: { root: { color: "#fff" } } },
     MuiIcon: { styleOverrides: { root: { color: "#fff" } } },
     MuiButton: {
