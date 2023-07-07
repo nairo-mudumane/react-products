@@ -1,6 +1,6 @@
 import React from "react";
 import { ICartContext } from "./@types";
-import { ICart, ICartProduct } from "../../@types";
+import { ICart, ICartProduct, IProduct } from "../../@types";
 import services from "../../services";
 import { getLocalCartData } from "./utils";
 
@@ -14,7 +14,9 @@ export function CartContextProvider(
   const defaultCart = getLocalCartData();
 
   const [cart, setCart] = React.useState<ICart | null>(defaultCart);
-  const [cartProducts, setCartProducts] = React.useState<ICartProduct[]>([]);
+  const [cartProducts, setCartProducts] = React.useState<ICartProduct[]>(
+    defaultCart?.products ?? []
+  );
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
@@ -26,38 +28,46 @@ export function CartContextProvider(
   async function remove(productId: number) {}
 
   async function add(productId: number, quantity: number) {
-    // let finalCartData: ICart = { user } as ICart;
-    // try {
-    //   // push product to products array
-    //   if (cartProducts.length > 0) {
-    //     let existingProduct =
-    //       cartProducts.find((item) => item.id === productId) ?? null;
-    //     if (existingProduct)
-    //       existingProduct = { ...existingProduct, quantityInCart: quantity };
-    //     else {
-    //       const product = await services.products.getById(productId);
-    //       if (!product) throw new Error("Failed to add product to cart");
-    //       else existingProduct = { ...product, quantityInCart: quantity };
-    //     }
-    //     finalCartData = {
-    //       ...finalCartData,
-    //       products: [...cartProducts, existingProduct!],
-    //     };
-    //   } else {
-    //     const product = await services.products.getById(productId);
-    //     if (!product) throw new Error("Failed to add product to cart");
-    //     else
-    //       finalCartData = {
-    //         ...finalCartData,
-    //         products: [{ ...product, quantityInCart: quantity }],
-    //       };
-    //   }
-    //   // end push product to products array
-    // } catch (error) {
-    //   setError((error as Error).message);
-    // }
-    // setCart(finalCartData);
+    try {
+      // let updatedCart = cartProducts;
+
+      let product = cartProducts.find((item) => item.id === productId) ?? null;
+      if (!product) product = await services.products.getById(productId);
+
+      if (!product) throw new Error("Failed to add product to cart");
+
+      const updatedItemIndex = cartProducts.findIndex(
+        (item) => item.id === productId
+      );
+
+      if (updatedItemIndex < 0) {
+        if (cartProducts.length > 0) {
+          const updatedItem = {
+            ...cartProducts[updatedItemIndex],
+            quantityInCart: quantity,
+          };
+          setCartProducts((prev) => [...prev, updatedItem]);
+          // cartProducts[updatedItemIndex] = updatedItem;
+          // } else cartProducts.push({ ...product!, quantityInCart: quantity });
+          // } else cartProducts.push({ ...product!, quantityInCart: quantity });
+        }
+      } else
+        setCartProducts((prev) => [
+          ...prev,
+          { ...product!, quantityInCart: quantity },
+        ]);
+
+      // setCartProducts(cartProducts);
+
+      // setCart({ products: updatedCart });
+    } catch (error) {
+      setError((error as Error).message);
+    }
   }
+
+  React.useEffect(() => {
+    console.log("cartProducts: ", cartProducts);
+  }, [cartProducts]);
 
   return (
     <CartContext.Provider

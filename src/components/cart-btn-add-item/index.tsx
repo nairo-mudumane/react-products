@@ -21,11 +21,11 @@ export function CartBtnAddItem({ productId }: ICartBtnAddItem) {
     setIsModalOpen(!isModalOpen);
   }
 
-  function addToCart() {
+  async function addToCart() {
     if (!user) toggleModal();
     else if (quantity === 0) {
       setQuantity(1);
-      add(productId, 1);
+      await add(productId, 1);
     } else add(productId, quantity);
   }
 
@@ -33,12 +33,12 @@ export function CartBtnAddItem({ productId }: ICartBtnAddItem) {
     remove(productId);
   }
 
-  React.useEffect(() => {
-    // if (cart && cart.products)
-    //   for (const cartProduct of cart.products) {
-    //     if (cartProduct.id === productId) setIsInCart(true);
-    //   }
-  }, [productId, cart]);
+  // React.useEffect(() => {
+  //   // if (cart && cart.products)
+  //   //   for (const cartProduct of cart.products) {
+  //   //     if (cartProduct.id === productId) setIsInCart(true);
+  //   //   }
+  // }, [productId, cart]);
 
   return (
     <>
