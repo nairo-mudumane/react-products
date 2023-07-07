@@ -6,11 +6,11 @@ import React from "react";
 import { ModalLogin } from "..";
 
 export function CartBtnAddItem({ productId }: ICartBtnAddItem) {
-  const { add, remove, cart } = useCart();
+  const { add, remove } = useCart();
   const { user } = useAuth();
 
   const [quantity, setQuantity] = React.useState<number>(0);
-  const [isInCart, setIsInCart] = React.useState<boolean>(false);
+  const [isInCart] = React.useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
   function onQuantityChange(newQuantity: number) {

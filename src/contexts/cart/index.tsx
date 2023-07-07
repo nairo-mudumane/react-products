@@ -1,6 +1,6 @@
 import React from "react";
 import { ICartContext } from "./@types";
-import { ICart, ICartProduct, IProduct } from "../../@types";
+import { ICart, ICartProduct } from "../../@types";
 import services from "../../services";
 import { getLocalCartData } from "./utils";
 
@@ -13,7 +13,7 @@ export function CartContextProvider(
 ) {
   const defaultCart = getLocalCartData();
 
-  const [cart, setCart] = React.useState<ICart | null>(defaultCart);
+  const [cart] = React.useState<ICart | null>(defaultCart);
   const [cartProducts, setCartProducts] = React.useState<ICartProduct[]>(
     defaultCart?.products ?? []
   );
@@ -25,7 +25,9 @@ export function CartContextProvider(
 
   function clear() {}
 
-  async function remove(productId: number) {}
+  async function remove(productId: number) {
+    console.log("productId: ", productId);
+  }
 
   async function add(productId: number, quantity: number) {
     try {
